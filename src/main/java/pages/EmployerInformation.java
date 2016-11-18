@@ -18,6 +18,8 @@ public class EmployerInformation extends PageBase {
     public static final By SIC_CODE_BUTTON = get("EmployerInformation.sicCodeButton");
     public static final By SIC_CODES = get("EmployerInformation.sicCodes");
     public static final By CLEAR_FORM = get("EmployerInformation.clearForm");
+    public static final By CONTINUE = get("EmployerInformation.continue");
+    public static final By VALIDATION = get("EmployerInformation.validation");
 
     public static void fillEmployerInformation(Employer employer) {
         $(COMPANY_NAME).val(employer.companyName);

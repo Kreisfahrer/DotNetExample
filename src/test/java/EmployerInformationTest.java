@@ -8,6 +8,7 @@ import popups.QuestionPopup;
 import java.util.Arrays;
 
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class EmployerInformationTest extends TestBase {
@@ -15,7 +16,7 @@ public class EmployerInformationTest extends TestBase {
 
     @BeforeClass
     public void setupClass() {
-        employer = new Employer("test", "testAddress", "12345", "111 Wheat");
+        employer = new Employer("test", "testAddress", "123456", "111 Wheat");
     }
 
     @Test
@@ -27,5 +28,12 @@ public class EmployerInformationTest extends TestBase {
                 EmployerInformation.COMPANY_NAME,
                 EmployerInformation.ADDRESS
         ).forEach(element -> $(element).shouldBe(empty));
+    }
+
+    @Test
+    public void failingTest() {
+        EmployerInformation.fillEmployerInformation(employer);
+        $(EmployerInformation.CONTINUE).click();
+        $(EmployerInformation.VALIDATION).shouldNotBe(visible);
     }
 }
