@@ -3,13 +3,13 @@ package pages;
 import core.PageBase;
 import dto.Employer;
 import org.openqa.selenium.By;
+import popups.QuestionPopup;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static heplers.Locators.get;
 
-public class EmployerInformation extends PageBase {
+public class EmployerInformationPage extends PageBase {
     public static final By COMPANY_NAME = get("EmployerInformation.companyName");
     public static final By ADDRESS = get("EmployerInformation.address");
     public static final By CITY = get("EmployerInformation.city");
@@ -30,6 +30,15 @@ public class EmployerInformation extends PageBase {
 
     public static void selectSic(String sic) {
         $(SIC_CODE_BUTTON).click();
-        $$(SIC_CODES).find(text(sic)).click();
+        $$(SIC_CODES).get(0).click();
+    }
+
+    public static void clearForm() {
+        $(CLEAR_FORM).click();
+        QuestionPopup.yes();
+    }
+
+    public static void clickContinue() {
+        $(CONTINUE).click();
     }
 }

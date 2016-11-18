@@ -2,10 +2,7 @@ import core.TestBase;
 import dto.Employer;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.EmployerInformation;
-import popups.QuestionPopup;
-
-import java.util.Arrays;
+import pages.EmployerInformationPage;
 
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
@@ -21,19 +18,16 @@ public class EmployerInformationTest extends TestBase {
 
     @Test
     public void fillEmployerInfoTest() {
-        EmployerInformation.fillEmployerInformation(employer);
-        $(EmployerInformation.CLEAR_FORM).click();
-        $(QuestionPopup.YES).click();
-        Arrays.asList(
-                EmployerInformation.COMPANY_NAME,
-                EmployerInformation.ADDRESS
-        ).forEach(element -> $(element).shouldBe(empty));
+        EmployerInformationPage.fillEmployerInformation(employer);
+        EmployerInformationPage.clearForm();
+        $(EmployerInformationPage.COMPANY_NAME).shouldBe(empty);
+        $(EmployerInformationPage.ADDRESS).shouldBe(empty);
     }
 
     @Test
     public void failingTest() {
-        EmployerInformation.fillEmployerInformation(employer);
-        $(EmployerInformation.CONTINUE).click();
-        $(EmployerInformation.VALIDATION).shouldNotBe(visible);
+        EmployerInformationPage.fillEmployerInformation(employer);
+        EmployerInformationPage.clickContinue();
+        $(EmployerInformationPage.VALIDATION).shouldNotBe(visible);
     }
 }
